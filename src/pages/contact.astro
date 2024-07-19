@@ -1,0 +1,58 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_DESCRIPTION } from "../consts";
+import ContactForm from "../components/ContactForm.astro";
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={"Contact"} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="Contact">
+    <Header />
+    <main>
+      <section>
+		<div class="left_container">
+			<h1 class="inview_fadein">Contact</h1>
+		</div>
+		<div class="right_container">
+			<p>
+				If you have any questions, please contact me. <br />
+				*microCMSの無料版を使用しているため、このお問合せフォームは現在機能しません。お手数ですが下記のメールアドレスからお問合せをお願いします。
+			</p>
+			<a
+			href="mailto:tomoya.takinami@gmail.com"
+			title="tomoya.takinami@gmail.com">tomoya.takinami@gmail.com</a
+			>
+			<ContactForm />
+		</div>
+      </section>
+    </main>
+    <Footer />
+    <script>
+      import initTextAnimation from "../library/initTextAnimation";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initTextAnimation();
+      }); // addEventListener
+    </script>
+  </body>
+  <style>
+	section {
+		display: flex;
+		justify-content: space-between;
+		align-content: baseline;
+		margin-top: 10vh;
+		gap: 50px;
+	}
+	
+	@media screen and (max-width: 821px) {
+		section {
+			flex-direction: column;
+			gap: 0;
+		}
+	}
+  </style>
+</html>

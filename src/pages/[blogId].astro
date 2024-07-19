@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getBlogs, getBlogDetail } from "../library/microcms";
+import "../styles/blogPost.css";
+import "../styles/global.css";
+
+// Get all path from blog pages
+// getStaticPaths => この動的なパスがどういった値を取り得るかを指定する
+export async function getStaticPaths() {
+  const response = await getBlogs({
+    fields: ["id"],
+  });
+  return response.contents.map((content: any) => ({
+    params: {
+      blogId: content.id,
+    },
+  }));
+}
+
+// Get single blog details
+const { blogId } = Astro.params;
+const blog = await getBlogDetail(blogId as string);
+// console.log(blog);
+
+// microCMSのリッチエディタではHTML文字列がそのまま返却されるため、set:htmlを使ってHTMLを画面にそのまま表示
+---
+
+ <!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <div class="post">
+      <div class="post_left_container">
+        <img
+          width={blog.eyecatch.width}
+          height={blog.eyecatch.height}
+          src={blog.eyecatch.url}
+          alt={`Blog - ${blog.title}`}
+        />
+      </div>
+      <div class="post_right_container">
+        <h1 class="title">{blog.title}</h1>
+        <span class="publish-date">{blog.publishedAt}</span>
+        <div class="content" set:html={blog.content} />
+      </div>
+    </div>
+    <Footer />
+  </body>
+</html>

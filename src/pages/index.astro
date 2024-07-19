@@ -1,0 +1,177 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Layout from "../layouts/Layout.astro";
+import "../styles/topPage.css";
+
+// Call microCMS
+import { getBlogs } from "../library/microcms";
+const response = await getBlogs({ fields: ["id", "title", "eyecatch"] });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .hover-image {
+        position: fixed;
+        width: 250px;
+        height: 350px;
+        pointer-events: none;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        z-index: 1000;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="Home">
+    <Layout
+    title=""
+    heroImage=""
+    >
+      <div class="hero_wrapper">
+        <h1 class="inview_fadein">WebGL School 2024</h1>
+        <p>
+          WebGL School is Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Neque consequatur quisquam accusantium atque tempore dicta
+          corporis a, fugit saepe reiciendis eveniet
+        </p>
+      </div>
+      <div class="title_wrapper">
+        <h2 class="inview_fadein">Private projects related to Three.js/WebGL and all assignments from the WebGL School</h2>
+        <ul>
+          {
+            response.contents.map((content: any, index: number) => (
+              <li class="list-item">
+                <a href={content.id}>
+                  {content.title}
+                  <div 
+                    id={`hover-image-${index}`} 
+                    class="hover-image" 
+                    style={`background-image: url(${content.eyecatch.url})`}
+                  ></div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Layout>
+
+    <!-- 
+Adding client-side JavaScript by adding one (or more) <script> tags. 
+-->
+    <script>
+      // import initTextAnimation & gsapConfig
+      import initTextAnimation from "../library/initTextAnimation";
+      import { gsap } from "../library/gsapConfig";
+      
+      /**
+       * astro:page-load => when a page transition is finised
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+      // document.addEventListener("astro:page-load", () => {
+        initTextAnimation();
+
+        // Hover image rotation
+        const items = document.querySelectorAll(".list-item");
+        let currentItem: number | null = null;
+        const lastMousePos = { x: 0, y: 0 };
+
+        function updateImagePosition(e: MouseEvent, hoverImage: HTMLElement | null) {
+          if (hoverImage) {
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          const scrollY = window.scrollY || document.documentElement.scrollTop;
+          
+          const imageWidth = 350;
+          const imageHeight = 250;
+          
+          let x = mouseX + 20;
+          let y = mouseY - imageHeight / 2;
+          
+          if (x + imageWidth > window.innerWidth) {
+            x = mouseX - imageWidth - 20;
+          }
+          
+          if (y + imageHeight > window.innerHeight) {
+            y = window.innerHeight - imageHeight;
+          }
+          
+          hoverImage.style.display = 'block';
+          hoverImage.style.left = `${x}px`;
+          hoverImage.style.top = `${y}px`;
+          hoverImage.style.width = `${imageWidth}px`;
+          hoverImage.style.height = `${imageHeight}px`;
+        }
+        }
+
+        items.forEach((item, index) => {
+          const hoverImage = item.querySelector(".hover-image") as HTMLElement | null;
+          
+          item.addEventListener("mouseenter", (e) => {
+            const mouseEvent = e as MouseEvent;
+            currentItem = index;
+            updateImagePosition(mouseEvent, hoverImage);
+            
+            if (hoverImage) {
+              gsap.to(hoverImage, {
+                opacity: 1,
+                rotation: 0,
+                ease: "power3.out",
+                duration: 0.4
+              });
+            }
+          });
+
+          item.addEventListener("mouseleave", () => {
+            if (currentItem === index && hoverImage) {
+              gsap.to(hoverImage, {
+                opacity: 0,
+                ease: "power3.out",
+                duration: 0.4,
+                onComplete: () => {
+                  hoverImage.style.display = 'none';
+                }
+              });
+              currentItem = null;
+            }
+          });
+        });
+
+        window.addEventListener("mousemove", (e) => {
+          const mouseEvent = e as MouseEvent;
+          
+          if (currentItem !== null) {
+            const hoverImage = document.getElementById(`hover-image-${currentItem}`) as HTMLElement | null;
+            updateImagePosition(mouseEvent, hoverImage);
+            
+            const mousePos = { x: mouseEvent.clientX, y: mouseEvent.clientY };
+            const speed = Math.sqrt(Math.pow(mousePos.x - lastMousePos.x, 2));
+            let rotation = speed * (mousePos.x > lastMousePos.x ? 1 : -1);
+            
+            // rotate -40 - +40
+            rotation = Math.max(-40, Math.min(40, rotation));
+            
+            if (hoverImage) {
+              gsap.to(hoverImage, {
+                rotation: rotation,
+                ease: "back.out(2)",
+                duration: 1.2
+              });
+            }
+            
+            lastMousePos.x = mousePos.x;
+            lastMousePos.y = mousePos.y;
+          }
+        });
+        
+      }); // eventListener
+    </script>
+  </body>
+</html>
