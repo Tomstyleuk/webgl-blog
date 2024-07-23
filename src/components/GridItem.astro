@@ -18,7 +18,9 @@ const { siteUrl, imageUrl, altText, title, description } = Astro.props;
   <div class="item_title">
     <h3>{title}</h3>
     <p>{description}</p>
-    <a href={siteUrl} title="Live website" target="_blank">Live</a>
+    <a class="link_btn" href={siteUrl} title="Live website" target="_blank"
+      >Live</a
+    >
   </div>
 </div>
 
@@ -29,7 +31,7 @@ const { siteUrl, imageUrl, altText, title, description } = Astro.props;
     grid-template-rows: auto;
     gap: 20px;
   }
-  
+
   .item_title a {
     display: inline-block;
     margin-top: 20px;
@@ -43,14 +45,51 @@ const { siteUrl, imageUrl, altText, title, description } = Astro.props;
   .item_title {
     grid-column: 1 / 3;
   }
-  
+
   .item_title h3 {
     font-size: 24px;
     font-weight: 600;
   }
-  
+
   .item_title p {
     margin: 0;
+  }
+
+  .link_btn {
+    padding: 6px 20px;
+    margin: 0 0 1em;
+    background-image: none;
+    background-color: #0a66a9;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    cursor: pointer;
+    border: solid transparent 2px;
+    border-radius: 10px;
+    transition: all 0.3s ease-out;
+  }
+
+  .link_btn:hover .link_btn:focus {
+    outline: none;
+  }
+
+  .link_btn::-moz-foucus-inner {
+    padding: 0;
+    border: none;
+  }
+
+  @media (hover: hover) {
+    .link_btn:hover {
+      color: black;
+      background: transparent;
+      border: solid #0a66a9 2px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -63,10 +102,10 @@ const { siteUrl, imageUrl, altText, title, description } = Astro.props;
       grid-column: 1 / 2;
     }
 
-    .image-section { 
-      grid-row: 1 / 2; 
+    .image-section {
+      grid-row: 1 / 2;
     }
-    
+
     .item_title {
       grid-row: 2 / 3;
     }

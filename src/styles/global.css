@@ -3,10 +3,12 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-html, body {
+html,
+body {
 	width: 100%;
 	height: 100%;
 }
+
 :root {
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
@@ -17,7 +19,7 @@ html, body {
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
-		
+
 	/* Space */
 	--xs-space: 10px;
 	--sm-space: 20px;
@@ -25,6 +27,7 @@ html, body {
 	--lg-space: 50px;
 	--xl-space: 100px;
 }
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -32,6 +35,7 @@ html, body {
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-bold.woff') format('woff');
@@ -39,6 +43,7 @@ html, body {
 	font-style: normal;
 	font-display: swap;
 }
+
 body {
 	font-family: 'Atkinson', sans-serif;
 	margin: 0;
@@ -78,18 +83,23 @@ h6 {
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
+
 h1 {
 	font-size: 3.052em;
 }
+
 h2 {
 	font-size: 2.441em;
 }
+
 h3 {
 	font-size: 1.953em;
 }
+
 h4 {
 	font-size: 1.563em;
 }
+
 h5 {
 	font-size: 1.25em;
 }
@@ -112,52 +122,65 @@ strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 	text-decoration: none;
 }
+
 a:hover {
 	color: var(--accent);
 }
+
 p {
 	margin-bottom: 1em;
 }
+
 .prose p {
 	margin-bottom: 2em;
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
 }
+
 input {
 	font-size: 16px;
 }
+
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
 }
-pre > code {
+
+pre>code {
 	all: unset;
 }
+
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
@@ -167,9 +190,26 @@ hr {
 	body {
 		font-size: 18px;
 	}
-	
+
 	main {
 		margin: 50px auto 0 !important;
+	}
+
+	h1 {
+		font-size: 30px;
+	}
+
+	h2 {
+		font-size: 24px;
+	}
+
+	h3 {
+		font-size: 20px;
+	}
+
+	.swiper-button-prev::after,
+	.swiper-button-next::after {
+		font-size: 22px !important;
 	}
 }
 
@@ -194,18 +234,18 @@ hr {
 
 /* Word Split Transition */
 .inview_fadein {
-    opacity: 0;
-    overflow-y: hidden;
+	opacity: 0;
+	overflow-y: hidden;
 }
 
 .inview_fadein.inView {
-    opacity: 1;
+	opacity: 1;
 }
 
 .word {
-    transform: translateY(50px);
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1) .2s, transform 1.4s cubic-bezier(0.22,1,0.36,1) .2s;
-    white-space: nowrap;
-    display: inline-block;
+	transform: translateY(50px);
+	opacity: 0;
+	transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) .2s, transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) .2s;
+	white-space: nowrap;
+	display: inline-block;
 }

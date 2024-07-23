@@ -42,21 +42,22 @@
 
 <script>
   import Swiper from "swiper";
-  import { Autoplay, Navigation, Pagination } from "swiper/modules";
+  import { FreeMode, Autoplay, Navigation, Pagination } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
 
   document.addEventListener("DOMContentLoaded", () => {
     new Swiper(".swiper-container", {
-      modules: [Autoplay, Navigation, Pagination],
+      modules: [FreeMode, Autoplay, Navigation, Pagination],
       slidesPerView: 3,
+      // freeMode: true,
       spaceBetween: 30,
       parallax: true,
-      // speed: 1500,
+      // speed: 2000,
       loop: true,
       autoplay: {
-        delay: 1500,
+        delay: 2000,
       },
       pagination: {
         el: ".swiper-pagination",
@@ -71,7 +72,7 @@
           slidesPerView: 1,
           spaceBetween: 10,
         },
-        480: {
+        520: {
           slidesPerView: 2,
           spaceBetween: 20,
         },

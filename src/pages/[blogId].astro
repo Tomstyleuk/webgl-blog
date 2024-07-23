@@ -24,12 +24,11 @@ export async function getStaticPaths() {
 // Get single blog details
 const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId as string);
-// console.log(blog);
 
 // microCMSのリッチエディタではHTML文字列がそのまま返却されるため、set:htmlを使ってHTMLを画面にそのまま表示
 ---
 
- <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
