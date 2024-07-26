@@ -1,7 +1,6 @@
 .Home {
-    background: rgb(212, 197, 231);
-    /* background: radial-gradient(circle at top center, rgba(212, 197, 231, 0.6) 36%, rgba(116, 53, 144, 1)90%); */
-    background-image: url('../../public/images/black_noise.webp');
+    background: #464646;
+    background-image: url('../images/black_noise.webp');
     background-size: 100% 100%;
 }
 

@@ -36,7 +36,6 @@ const blog = await getBlogDetail(blogId as string);
   <body>
     <Header />
     <div class="post">
-      <!-- <div class="dot_grid_Bg"> -->
       <div class="post_left_container">
         <img
           width={blog.eyecatch.width}
@@ -50,7 +49,6 @@ const blog = await getBlogDetail(blogId as string);
         <span class="publish-date">{blog.publishedAt}</span>
         <div class="content" set:html={blog.content} />
       </div>
-      <!-- </div> -->
     </div>
     <Footer />
   </body>
