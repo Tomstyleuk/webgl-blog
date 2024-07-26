@@ -1,6 +1,6 @@
-import { gsap } from "./gsapConfig";
+import { gsap } from "./gsapConfig"; // Ensure the path is correct
 
-function animateWords(wordElements) {
+function animateWords(wordElements: NodeListOf<HTMLElement>) {
   gsap.to(wordElements, {
     opacity: 1,
     y: 0,
@@ -10,8 +10,8 @@ function animateWords(wordElements) {
   });
 }
 
-export default function initTextAnimation(selector = ".inview_fadein") {
-  const texts = document.querySelectorAll(selector);
+export default function initTextAnimation(selector: string = ".inview_fadein") {
+  const texts = document.querySelectorAll<HTMLElement>(selector);
 
   texts.forEach((text) => {
     const words = text.innerHTML.split(" ");
@@ -19,7 +19,7 @@ export default function initTextAnimation(selector = ".inview_fadein") {
       .map((word) => `<span class="word">${word}</span>`)
       .join(" ");
 
-    const wordElements = text.querySelectorAll(".word");
+    const wordElements = text.querySelectorAll<HTMLElement>(".word");
 
     const observer = new IntersectionObserver(
       (entries) => {
