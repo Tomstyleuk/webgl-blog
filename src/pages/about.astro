@@ -1,6 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
 import GridItem from "../components/GridItem.astro";
 import { SITE_DESCRIPTION } from "../consts";
@@ -11,27 +13,28 @@ import { SITE_DESCRIPTION } from "../consts";
     <BaseHead title={"About"} description={SITE_DESCRIPTION} />
   </head>
   <body class="About">
-    <Layout title="About Me" heroImage="/images/2.webp">
+    <Header />
+    <main>
+      <div class="hero_wrapper">
+        <div class="hero_title">
+          <h1 class="inview_fadein">About me</h1>
+        </div>
+        <div class="hero_bottom_wrapper">
+          <div class="hero_bottom_intro">
+            <p>
+              2018年からドイツのミュンヘンに住んでいます。ミュンヘンのWeb制作会社で4年間経験を積み、2023年7月から本業の傍らフリーランスとしても活動を始めました。GSAPやThree.jsのスキルを活かし、アニメーションやインターラクティブなWebサイト制作が得意な日本のウェブ制作会社様と一緒に働きたいと考えています。趣味は旅行、食べ歩き、旅行先の古着屋でショッピングすることです。
+            </p>
+          </div>
+          <ImageCarousel />
+        </div>
+      </div>
       <section>
-        <p>
-          2018年からドイツのミュンヘンに住んでいます。ミュンヘンのWeb制作会社で4年間経験を積み、2023年7月から本業の傍らフリーランスとしても活動を始めました。GSAPやThree.jsのスキルを活かし、アニメーションやインターラクティブなWebサイト制作が得意な日本のウェブ制作会社様と一緒に働きたいと考えています。趣味は旅行、食べ歩き、旅行先の古着屋でショッピングすることです。
-        </p>
         <p>
           毎日の勉強が日課ですが、ミュンヘンに住んでいるので休みの日は、夏は近くの山や湖に行きハイキングやSUPをしたり、冬はスキーをしたりなどアウトドアスポーツでリフレッシュしています。
           また旅行も好きなので、ヨーロッパの綺麗な街を探索してカフェや古着屋を見つけるのが好きです。
         </p>
-        <ImageCarousel />
         <p>
-          日本国内はもちろん、海外の様々なWebサイトを研究し、使用されているアニメーションの再現などをすることが好きです。再現することは楽しくいつも学べることがあります。
-        </p>
-        <p>
-          Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi
-          tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit.
-          Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu
-          lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non
-          tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt
-          praesent semper feugiat nibh sed pulvinar proin gravida. Egestas
-          integer eget aliquet nibh praesent tristique magna.
+          日本国内はもちろん、海外の様々なWebサイトを研究し、使用されているアニメーションの再現などをすることが好きです。再現する=チャレンジと考えていて、楽しいと同時にいつも自分の知らないことを学べる機会があります。
         </p>
       </section>
       <section>
@@ -62,19 +65,20 @@ import { SITE_DESCRIPTION } from "../consts";
             siteUrl="https://webgl-barba-page-transition.vercel.app/"
             imageUrl="/images/webgl-barbaJS-pageTransition.webp"
             altText="Blog"
-            title="BLog - WebGL&Barba.js"
+            title="デモブログ - WebGL&Barba.js"
             description="WebGLとBarba.jsを使用しスムーズなページ遷移の実装（デスクトップ閲覧推奨）"
           />
           <GridItem
             siteUrl="https://toms-webgellary.vercel.app/"
             imageUrl="/images/blog.webp"
             altText="Blog"
-            title="Blog - Next.js&microCMS"
+            title="ブログ - Next.js&microCMS"
             description="今まで再現してきた一部のアニメーション実装の解説"
           />
         </div>
       </section>
-    </Layout>
+    </main>
+    <Footer />
 
     <script>
       import initTextAnimation from "../library/initTextAnimation";
@@ -84,10 +88,70 @@ import { SITE_DESCRIPTION } from "../consts";
       });
     </script>
     <style>
+      .hero_wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+
+      .hero_title {
+        height: 60vh;
+        align-content: center;
+        align-items: center;
+      }
+
+      .hero_wrapper h1 {
+        font-size: calc(100vw / 6);
+        line-height: 1.1em;
+        white-space: nowrap;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .hero_bottom_wrapper {
+        display: flex;
+        justify-content: space-between;
+        height: 40vh;
+        gap: 10%;
+        align-items: center;
+      }
+
+      .hero_bottom_intro {
+        flex: 1;
+      }
+
+      section {
+        margin: 0 0 10vh;
+      }
+
       .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 50px;
+      }
+
+      @media (max-width: 821px) {
+        .hero_wrapper {
+          margin: 0 0 10vh;
+        }
+
+        .hero_bottom_wrapper {
+          flex-direction: column;
+          height: auto;
+          gap: 20px;
+        }
+
+        .About h2 {
+          font-size: 30px;
+        }
+      }
+
+      @media (min-width: 1100px) {
+        .hero_wrapper h1 {
+          font-size: calc((1100px - 2%) / 6);
+        }
       }
     </style>
   </body>

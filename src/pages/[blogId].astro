@@ -35,21 +35,23 @@ const blog = await getBlogDetail(blogId as string);
   </head>
   <body>
     <Header />
-    <div class="post">
-      <div class="post_left_container">
-        <img
-          width={blog.eyecatch.width}
-          height={blog.eyecatch.height}
-          src={blog.eyecatch.url}
-          alt={`Blog - ${blog.title}`}
-        />
+    <main>
+      <div class="post">
+        <div class="post_left_container">
+          <img
+            width={blog.eyecatch.width}
+            height={blog.eyecatch.height}
+            src={blog.eyecatch.url}
+            alt={`Blog - ${blog.title}`}
+          />
+        </div>
+        <div class="post_right_container">
+          <h1 class="title">{blog.title}</h1>
+          <span class="publish-date">{blog.publishedAt}</span>
+          <div class="content" set:html={blog.content} />
+        </div>
       </div>
-      <div class="post_right_container">
-        <h1 class="title">{blog.title}</h1>
-        <span class="publish-date">{blog.publishedAt}</span>
-        <div class="content" set:html={blog.content} />
-      </div>
-    </div>
+    </main>
     <Footer />
   </body>
 </html>

@@ -58,6 +58,7 @@ body {
 	overflow-x: hidden;
 	width: 100%;
 	height: auto;
+	line-height: 1.6rem;
 }
 
 main {
@@ -196,7 +197,7 @@ hr {
 	}
 
 	h1 {
-		font-size: 30px;
+		font-size: 32px;
 	}
 
 	h2 {
