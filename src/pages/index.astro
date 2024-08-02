@@ -32,7 +32,9 @@ const response = await getBlogs({ fields: ["id", "title", "eyecatch"] });
   <body class="Home">
     <Layout title="" heroImage="">
       <div class="hero_wrapper">
-        <h1 class="inview_fadein">WebGL School 2024</h1>
+        <h1 class="inview_fadein" aria-label="WebGL School 2024">
+          WebGL School 2024
+        </h1>
         <p>
           このブログでは、Three.jsやWebGLを使用して制作したインタラクティブな制作物を掲載しています。またWebGLスクールを受講しているので、そのアウトプット用として残していきます。
           WebGL
@@ -40,7 +42,10 @@ const response = await getBlogs({ fields: ["id", "title", "eyecatch"] });
         </p>
       </div>
       <div class="title_wrapper">
-        <h2 class="inview_fadein">
+        <h2
+          class="inview_fadein"
+          aria-label="Three.js/WebGL private projects and WebGL School assignments"
+        >
           Three.js/WebGL private projects and WebGL School assignments
         </h2>
         <ul>
